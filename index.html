@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balázs Járó - Senior Data Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/d0b96a4614.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e8e8e8;
+        }
+
+        .card {
+            /* width: 300px; */
+            padding: 20px;
+            background: #fff;
+            border: 6px solid #000;
+            box-shadow: 12px 12px 0 #000;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 17px 17px 0 #000;
+        }
+
+        .card__title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #000;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card__title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 90%;
+            height: 3px;
+            background-color: #000;
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .card:hover .card__title::after {
+            transform: translateX(0);
+        }
+
+        .card__content {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .card__form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card__form input {
+            padding: 10px;
+            border: 3px solid #000;
+            font-size: 16px;
+            font-family: inherit;
+            transition: transform 0.3s;
+            width: calc(100% - 26px);
+            /* Adjust for padding and border */
+        }
+
+        .card__form input:focus {
+            outline: none;
+            transform: scale(1.05);
+            background-color: #000;
+            color: #ffffff;
+        }
+
+        .card__button {
+            border: 3px solid #000;
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            font-size: 18px;
+            left: 20%;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+            width: 50%;
+            height: 100%;
+        }
+
+        .card__button::before {
+            content: "Sure?";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 105%;
+            background-color: #5ad641;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .card__button:hover::before {
+            transform: translateY(0);
+        }
+
+        .card__button:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(2px, 2px);
+            }
+
+            25% {
+                transform: translate(-2px, -2px);
+            }
+
+            50% {
+                transform: translate(-2px, 2px);
+            }
+
+            75% {
+                transform: translate(2px, -2px);
+            }
+
+            100% {
+                transform: translate(2px, 2px);
+            }
+        }
+
+        .glitch {
+            animation: glitch 0.3s infinite;
+        }
+
+
+        .cards {
+            /* width: 320px; */
+            padding: 30px;
+            background: #fff;
+            border: 8px solid #000000;
+            box-shadow: 15px 15px 0 #f2c5c5;
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cards:active {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .cards:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 20px 20px 0 #f2c5c5;
+        }
+        .banner {
+            position: absolute;
+            /* top: 3px; */
+            bottom: 3px;
+            right: -95px;
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            width: 350px;
+            text-align: center;
+            transform: rotate(135deg);
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: background 0.5s ease;
+        }
+        .banner-text {
+            display: inline-block;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            width: 100%;
+            position: absolute;
+            left: 13%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-25%) rotate(180deg);
+        }
+        .banner:hover .banner-text:first-child {
+            opacity: 0;
+            transform: translateX(80%) translateY(-80%);
+        }
+        .banner:hover .banner-text:last-child {
+            opacity: 1;
+            transform: translateX(-40%);
+        }
+        .banner-text:last-child {
+            opacity: 0;
+            transform: translateY(60%);
+        }
+        .banner:hover {
+            background: red;
+        }
+        .cards__title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+            border-bottom: 2px solid #000;
+            width: 50%;
+            /* or any other percentage or pixel value */
+        }
+        .cards__subtitle {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        hr {
+            border: none;
+            border-top: 5px dotted #f2c5c5;
+        }
+
+        .download-button {
+            position: absolute;
+            right: 5%;
+            bottom: 8%;
+            border-width: 1px;
+            color: rgb(19, 19, 19);
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 4px;
+            z-index: 1;
+        }
+
+        .download-button .docs {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            min-height: 40px;
+            padding: 0 10px;
+            border-radius: 4px;
+            z-index: 1;
+            background-color: #ffffff;
+            border: solid 1px #e8e8e82d;
+            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .download-button:hover {
+            box-shadow: rgba(233, 233, 233, 0.555) 0px 54px 55px,
+                rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+                rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        .download {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 90%;
+            margin: 0 auto;
+            z-index: -1;
+            border-radius: 0px 0px 4px 4px;
+            transform: translateY(0%);
+            background-color: #f2c5c5;
+            border: solid 1px #f9b6b6;
+            transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            cursor: pointer;
+        }
+
+        .download-button:hover .download {
+            transform: translateY(100%);
+        }
+
+        .download svg polyline,
+        .download svg line {
+            animation: docs 1s infinite;
+        }
+
+        @keyframes docs {
+            0% {
+                transform: translateY(0%);
+            }
+
+            50% {
+                transform: translateY(-15%);
+            }
+
+            100% {
+                transform: translateY(0%);
+            }
+        }
+
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6 md:p-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-1">
+                <div class="cards bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-center mb-4">
+                        <img src="img/profile_pic_250.jpg" alt="Profile Picture" class="rounded-full" width="250">
+                    </div>
+                    <!-- <div class="banner">
+                        <span class="banner-text">Download CV</span>
+                        <span class="banner-text">JOIN US</span>
+                      </div> -->
+                    <span class="cards__title">Balázs Járó</span>
+                    <span class="cards__subtitle">Senior Data Engineer</span>
+                    <div class="border-t border-gray-200 pt-4 mt-4">
+                    <h3 class="text-md font-semibold text-gray-700 mb-2">Contact</h3>                    
+                        <p class="text-gray-600 mb-1"><i class="fa-solid fa-paper-plane fa-lg"
+                                style="padding: 5%;"></i>jarobalazs@gmail.com
+                        </p>
+                        <p class="text-gray-600 mb-1"><i class="fa-solid fa-mobile-screen-button fa-lg"
+                                style="padding: 5%;"></i>+36-30-757-1638</p>
+                        <p class=" text-gray-600"><i class="fa-solid fa-location-dot fa-lg"
+                                style="padding: 5%;"></i>Budapest IX.</p>
+                    </div>
+                    <a href="balazs_jaro_cv.pdf">
+                    <button class="download-button"">
+                        <div class="docs">
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="css-i6dzq1"
+                          >
+                            <path
+                              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                            ></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                          </svg>
+                          Download CV
+                        </div>
+                        <div class="download">
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="24"
+                            height="24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="css-i6dzq1"
+                          >
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                          </svg>
+                        </div>
+                      </button>
+                    </a>
+                </div>
+                
+            </div>
+
+            <div class="md:col-span-2 space-y-8">
+                <div class="card bg-white rounded-lg shadow-md p-8">
+                    <span class="card__title">CAREER SUMMARY</span>
+                    <p class="text-gray-700 leading-relaxed" style="text-align:justify">As a Senior Data Engineer, I
+                        specialize in
+                        designing and
+                        implementing scalable data solutions, optimizing ETL processes, and integrating cloud-based
+                        analytics platforms. My experience spans multiple industries, leveraging modern data
+                        technologies to enhance efficiency, data quality, and
+                        business insights. I’m passionate about building efficient, high-quality data solutions that
+                        drive business success. Open to networking, collaborations, and discussions on data engineering
+                        best practices.
+                    </p>
+                </div>
+
+                <div class="card bg-white rounded-lg shadow-md p-6">
+                    <span class="card__title">WORK EXPERIENCE</span>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-end mb-3">
+                                <h3
+                                    class="text-xl font-extrabold text-gray-700 underline decoration-dotted underline-offset-4">
+                                    SUPERCHARGE</h3>
+                                <p class="text-gray-600 text-sm">Nov. 2023 - Present • 1 year 5 mons</p>
+                            </div>
+                            <h4 class="text-md font-semibold text-gray-700 mb-3">Senior Data Engineer</h4>
+                            <!-- <p class="text-gray-700 leading-relaxed">As a Senior Data Engineer, I specialize in
+                                designing and
+                                implementing scalable data solutions, optimizing ETL 
+                                processes, and integrating cloud-based analytics platforms. My experience spans multiple
+                                industries, leveraging
+                                modern data technologies to enhance efficiency, data quality, and business insights.</p> -->
+                            <p style="text-align:justify;">
+                                ✅<b>ETL & Data Pipelines</b> – Implemented <b>Dagster</b> as a modern ETL tool,
+                                streamlining data workflows across
+                                projects. Designed automated ingestion pipelines using <b>Snowflake</b>,
+                                <b>BigQuery</b>, and <b>AWS S3</b> to ensure
+                                real-time data integration.
+                                <br>✅<b>Cloud & Data Warehousing</b> – Built robust, multi-layered <b>data
+                                    warehouses</b>
+                                in <b>AWS PostgreSQL RDS</b>,
+                                <b>Snowflake</b>, and <b>BigQuery</b>, supporting scalable analytics architectures.
+                                Designed data migration strategies
+                                using <b>Azure Cosmos DB</b> and <b>Azure Data Factory</b>.
+                                <br>✅<b>Data Transformation & Analytics</b> – Integrated <b>DBT</b> for efficient
+                                data
+                                modeling, ensuring consistent and
+                                accurate business reporting. Deployed analytics dashboards using <b>AWS
+                                    Quicksight</b> and <b>Superset</b> for actionable
+                                insights.
+                                <br>✅<b>Data Quality & Testing</b> – Established a data validation framework with
+                                <b>Great Expectations</b>, enhancing data
+                                reliability across pipelines. Developed unit testing solutions to ensure accuracy
+                                and consistency in data workflows.
+                                <br>✅<b>Infrastructure as Code & Automation</b> – Leveraged <b>Bicep files</b> in
+                                Azure
+                                for Infrastructure as Code (IaC),
+                                improving scalability and maintainability of cloud resources.
+                            </p>
+                            <p class="text-gray-700 mt-4 mb-2">Technical Expertise:</p>
+                            <p>
+                                🔹Cloud Platforms: <b>Google Cloud Platform, AWS, Microsoft Azure</b>
+                                </br>🔹Databases: <b>BigQuery, SQL Server, PostgreSQL, Snowflake</b>
+                                </br>🔹ETL & Data Pipelines: <b>Data Factory, Dagster, dbt, Python, SQL</b>
+                                </br>🔹BI & Visualization: <b>AWS QuickSight, Apache Superset, Power BI</b>
+                                </br>🔹Data Governance: <b>Fault detection, data validation, and process</b></p>
+                        </div>
+                        <hr class="border-gray-200 m-10">
+                        <div>
+                            <div class="flex justify-between items-end mb-2">
+                                <h3
+                                    class="text-xl font-extrabold text-gray-700 underline decoration-dotted underline-offset-4">
+                                    AUTOWALLIS GROUP</h3>
+                                <p class="text-gray-600 text-sm">Apr. 2023 - Nov. 2023 • 8 mons</p>
+                            </div>
+                            <h4 class="text-md font-semibold text-gray-700 mb-3">Senior BI Developer</h4>
+                            <p>At AutoWallis Group, I was responsible for the
+                                <b>evaluation and
+                                    development of BI requirements</b>, ensuring effective
+                                data integration and visualization strategies. My responsibilities included:
+                            </p>
+                            <br>✅<b>BI Strategy & Development</b> – Assessed and implemented <b>business
+                                intelligence
+                                solutions</b> to support
+                            data-driven decision-making.
+                            <br>✅<b>Cloud Data Management</b> – Designed and managed <b>data integrations, storage
+                                models, and ETL workflows</b> using
+                            <b>Microsoft Azure SQL Server, Data Factory, and Blob Storage</b>.
+                            <br>✅<b>Data Visualization</b> – Developed <b>interactive Power BI dashboards</b>,
+                            enabling advanced reporting and analytics.
+
+                            <p class="text-gray-700 mt-4 mb-2">Technical Expertise:</p>
+                            <p>
+                                🔹Cloud Platforms: <b>AWS, Microsoft Azure</b>
+                                </br>🔹Databases: <b>SQL Server, PostgreSQL, Redshift, MySQL, Greenplum</b>
+                                </br>🔹ETL & Data Pipelines: <b>Azure Data Factory, Talend, HVR, Python, SQL</b>
+                                </br>🔹BI & Visualization: <b>Power BI, Tableau</b>
+                                </br>🔹Data Governance: <b>Fault detection, data validation, and process automation</b>
+                            </p>
+                        </div>
+                        <hr class="border-gray-200 m-10">
+                        <div>
+                            <div class="flex justify-between items-end mb-2">
+                                <h3
+                                    class="text-xl font-extrabold text-gray-700 underline decoration-dotted underline-offset-4">
+                                    STARSCHEMA LTD. – BI & Data Engineering
+                                    Roles</h3>
+                                <p class="text-gray-600 text-sm">2020 – 2023</p>
+                            </div>
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-md font-semibold text-gray-700 mb-3">BI Developer</h4>
+                                <p class="text-gray-600 text-sm">May. 2022 - Apr. 2023 • 11 mons</p>
+                            </div>
+                            <p>As a <b>BI Developer</b>, I was responsible for designing and implementing <b>business intelligence solutions</b>, focusing on <b>data pipeline development, ETL processes, and analytics</b>. My key contributions included: </p>
+                        <br>✅ <b>BI Development & Automation</b> – Developed and optimized <b>ETL workflows</b> and <b>data transformation processes</b> using <b>Python and SQL</b>.  
+
+                        <br>✅ <b>End-to-End Solution Implementation</b> – Designed, implemented, and tested <b>BI solutions</b> based on customer requirements, ensuring a seamless transition to production.  
+                            
+                        <br>✅ <b>Data Management & Integration</b> – Assessed, planned, and implemented <b>data collection, storage, and processing solutions</b> to improve data availability and accuracy.  
+                            
+                        <br>✅ <b>Technical Documentation & Knowledge Sharing</b> – Provided <b>comprehensive documentation and knowledge transfer</b> to operational teams, supporting long-term system maintenance.
+                        </div>
+                        <hr class="border-gray-200 m-10">
+                        <div>
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-md font-semibold text-gray-700 mb-3">Database administrator</h4>
+                                <p class="text-gray-600 text-sm">Jun. 2021 - May. 2022 • 1 year</p>
+                            </div>
+                            <p>In my role as a <b>Database Administrator</b>, I managed the <b>operation and optimization of data warehouses</b>, supporting ETL tools, reporting solutions, and overall data infrastructure. My responsibilities included:</p>
+                            <br>✅ <b>Data Warehouse Management</b> – Administered <b>PostgreSQL, Redshift</b>, and other database systems to ensure optimal performance and availability.  
+
+                            <br>✅ <b>ETL & Data Processing Optimization</b> – Monitored and improved <b>ETL workflows</b> enhancing efficiency in data ingestion and transformation processes.  
+                            
+                            <br>✅ <b>Technical Support & Issue Resolution</b> – Provided <b>L3-level support</b> troubleshooting complex <b>database, ETL, and reporting issues</b> for internal teams and end users.  
+                            
+                            <br>✅ <b>Version Control & Infrastructure Management</b> – Maintained database versioning using <b>GitHub</b> managed database permissions, and implemented best practices for data security and governance.  
+                            
+                            <br>✅ <b>Cloud & Automation</b> – Worked with <b>AWS services</b>, ensuring seamless integration and scalability of cloud-based data solutions.  
+                        </div>
+                        <hr class="border-gray-200 m-10">
+                        <div>
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-md font-semibold text-gray-700 mb-3">Business Intelligence Support</h4>
+                                <p class="text-gray-600 text-sm">Sep. 2020 - Jun. 2021 • 10 mons</p>
+                            </div>
+                            <p">As part of the <b>BI Support Team</b>, I played a key role in ensuring data integrity, system reliability, and proactive issue resolution for BI operations. My main tasks included:</p>
+                            <br>✅ <b>Data Quality & Discrepancy Detection</b> – Monitored and analyzed <b>data inconsistencies</b>, assisting BI teams in troubleshooting and resolving data issues.  
+
+                            <br>✅ <b>Technical Support & Troubleshooting</b> – Provided <b>L2-level support</b>, managing support tickets and ensuring prompt resolution of <b>database, ETL, and reporting errors</b>.  
+                            
+                            <br>✅ <b>Server & Database Monitoring</b> – Supervised <b>server, database, and data loading processes</b>, collaborating with international teams to maintain system performance.  
+                            
+                            <br>✅ <b>Cross-Functional Communication</b> – Acted as a bridge between <b>technical and business teams</b>, ensuring proactive issue resolution and clear communication.  
+                            
+                            <br>✅ <b>BI & ETL Tools</b> – Worked with <b>Tableau, Talend, HVR, MySQL, Pivotal Greenplum</b>, and Excel for data processing and reporting.
+                            
+                            <p class="text-gray-700 mt-4 mb-2">Technical Expertise:</p>
+                            <p>
+                                🔹Cloud Platforms: <b>AWS</b>
+                                </br>🔹Databases: <b>PostgreSQL, Redshift, MySQL, Greenplum</b>
+                                </br>🔹ETL & Data Pipelines: <b>Talend, HVR, Python, SQL</b>
+                                </br>🔹BI & Visualization: <b>Tableau</b>
+                                </br>🔹Data Governance: <b>Fault detection, data validation, and process automation</b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-lg shadow-md p-6">
+                    <span class="card__title">EDUCATION</span>
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-1">Mechatronics Engineer BSC • University
+                                of
+                                Pannonia</h3>
+                            <p class="text-gray-600 text-sm">2016 - 2020 • Bachelor‘s Degree, Engineer in Mechatronics
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-1">Economics in Tourism and Catering BA •
+                                University of Pannonia</h3>
+                            <p class="text-gray-600 text-sm">2011 - 2015 • Bachelor‘s Degree, Economist in Tourism and
+                                Catering</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-1">English Language and IT Class • Lóczy
+                                Lajos
+                                Highschool</h3>
+                            <p class="text-gray-600 text-sm">2006 - 2011 • Graduation Certificate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-lg shadow-md p-6">
+                    <span class="card__title">SKILLS</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <ul class="list-disc list-inside text-gray-700">
+                            <li class="mb-1">English language (Fluent)</li>
+                            <li class="mb-1">German language (Passive)</li>
+                            <li class="mb-1">Driving license B category</li>
+                        </ul>
+                        <ul class="list-disc list-inside text-gray-700">
+                            <li>ECDL certificate</li>
+                            <li>AWS Certified Cloud Practitioner Certificate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
